@@ -1,4 +1,4 @@
-package nl.actorius.service;
+/*package nl.actorius.service;
 
 import nl.hsleiden.service.AuthenticationService;
 import java.util.Optional;
@@ -12,10 +12,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- *
- * @author Peter van Vliet <peter@actorius.nl>
- */
 public class AuthenticationServiceTest
 {
     private final AuthenticationService subject;
@@ -91,3 +87,4 @@ public class AuthenticationServiceTest
         assertFalse(actual);
     }
 }
+*/

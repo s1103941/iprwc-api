@@ -20,12 +20,7 @@ import nl.hsleiden.View;
 import nl.hsleiden.model.User;
 import nl.hsleiden.service.UserService;
 
-/**
- * Meer informatie over resources:
- *  https://jersey.java.net/documentation/latest/user-guide.html#jaxrs-resources
- * 
- * @author Peter van Vliet
- */
+
 @Singleton
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
@@ -41,7 +36,7 @@ public class UserResource
     
     @GET
     @JsonView(View.Public.class)
-    @RolesAllowed("GUEST")
+    @RolesAllowed("ADMIN")
     public Collection<User> retrieveAll()
     {
         return service.getAll();
@@ -53,7 +48,7 @@ public class UserResource
     @RolesAllowed("GUEST")
     public User retrieve(@PathParam("id") int id)
     {
-        return service.get(id);
+        return service.getById(id);
     }
     
     @POST

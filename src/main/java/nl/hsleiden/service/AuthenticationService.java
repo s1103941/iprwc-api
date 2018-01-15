@@ -34,8 +34,7 @@ public class AuthenticationService implements Authenticator<BasicCredentials, Us
     public Optional<User> authenticate(BasicCredentials credentials) throws AuthenticationException
     {
         User user = userDAO.getByEmailAddress(credentials.getUsername());
-        
-        if (user != null && user.getPassword().equals(credentials.getPassword()))
+        if (user != null && new String(user.getPassword()).equals(credentials.getPassword()))
         {
             return Optional.of(user);
         }
@@ -46,6 +45,6 @@ public class AuthenticationService implements Authenticator<BasicCredentials, Us
     @Override
     public boolean authorize(User user, String roleName)
     {
-        return user.hasRole(roleName);
+        return user.isRole(roleName);
     }
 }

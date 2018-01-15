@@ -1,3 +1,5 @@
+
+/*
 package nl.actorius.persistence;
 
 import nl.hsleiden.persistence.UserDAO;
@@ -9,10 +11,6 @@ import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- *
- * @author Peter van Vliet <peter@actorius.nl>
- */
 public class UserDAOTest
 {
     private UserDAO subject;
@@ -83,3 +81,4 @@ public class UserDAOTest
         assertEquals(expectedSize, actualSize);
     }
 }
+*/

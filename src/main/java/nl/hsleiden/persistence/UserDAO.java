@@ -18,24 +18,36 @@ public class UserDAO
     public UserDAO()
     {
         User user1 = new User();
-        user1.setFullName("First user");
-        user1.setPostcode("1234AB");
-        user1.setStreetnumber("12");
-        user1.setEmailAddress("first@user.com");
-        user1.setPassword("first");
-        user1.setRoles(new String[] { "GUEST", "ADMIN" });
+        user1.setUserId(123);
+        user1.setFirstName("Student");
+        user1.setMiddleName("hey");
+        user1.setLastName("Account");
+        user1.setEmailAddress("student@user.com");
+        user1.setPassword("student");
+        user1.setRole("KLANT");
         
         User user2 = new User();
-        user2.setFullName("Second user");
-        user2.setPostcode("9876ZY");
-        user2.setStreetnumber("98");
-        user2.setEmailAddress("second@user.com");
-        user2.setPassword("second");
-        user2.setRoles(new String[] { "GUEST" });
+        user2.setUserId(234);
+        user2.setFirstName("Admin");
+        user2.setMiddleName("heyy");
+        user2.setLastName("Account");
+        user2.setEmailAddress("admin@user.com");
+        user2.setPassword("admin");
+        user2.setRole("ADMIN");
+        
+        User user3 = new User();
+        user3.setUserId(345);
+        user3.setFirstName("Docent");
+        user3.setLastName("Account");
+        user3.setEmailAddress("docent@user.com");
+        user3.setPassword("docent");
+        user3.setRole("KLANT");
+   
         
         users = new ArrayList<>();
         users.add(user1);
         users.add(user2);
+        users.add(user3);
     }
     
     public List<User> getAll()
@@ -43,16 +55,25 @@ public class UserDAO
         return users;
     }
     
-    public User get(int id)
+    public User getById(int id) {
+        Optional<User> result = users.stream()
+            .filter(user -> user.getUserId() == id)
+            .findAny();
+        
+        return result.isPresent()
+            ? result.get()
+            : null;
+    }
+    
+    public User getByName(String name)
     {
-        try
-        {
-            return users.get(id);
-        }
-        catch(IndexOutOfBoundsException exception)
-        {
-            return null;
-        }
+        Optional<User> result = users.stream()
+            .filter(user -> user.getName().equals(name))
+            .findAny();
+        
+        return result.isPresent()
+            ? result.get()
+            : null;
     }
     
     public User getByEmailAddress(String emailAddress)
@@ -73,11 +94,23 @@ public class UserDAO
     
     public void update(int id, User user)
     {
-        users.set(id, user);
+        int index = -1;
+        for(int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserId() == id)
+                index = i;
+        }
+        if(index != -1)
+            users.set(index, user);
     }
     
     public void delete(int id)
     {
-        users.remove(id);
+        int index = -1;
+        for(int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserId() == id)
+                index = i;
+        }
+        if(index != -1)
+            users.remove(index);
     }
 }

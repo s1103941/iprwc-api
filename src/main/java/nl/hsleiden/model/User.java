@@ -16,119 +16,134 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class User implements Principal
 {
-    @NotEmpty
-    @Length(min = 3, max = 100)
+    
+    public enum UserRoles {
+        KLANT, ADMIN
+    }
+    
     @JsonView(View.Public.class)
-    private String fullName;
+    private int userId;
+
+    @NotEmpty
+    @Length(min = 2, max = 100)
+    @JsonView(View.Public.class)
+    private String firstName;
+    
+    @Length(min = 0, max = 100)
+    @JsonView(View.Public.class)
+    private String middleName;
     
     @NotEmpty
-    @Length(min = 6, max = 7)
+    @Length(min = 2, max = 100)
     @JsonView(View.Public.class)
-    private String postcode;
+    private String lastName;
     
     @NotEmpty
-    @Length(min = 1, max = 10)
-    @JsonView(View.Public.class)
-    private String streetnumber;
+    @Length(min = 1, max = 40)
+    @JsonView(View.Internal.class)
+    private String password;
     
     @NotEmpty
     @Email
     @JsonView(View.Public.class)
     private String emailAddress;
     
-    @NotEmpty
-    @Length(min = 8)
-    @JsonView(View.Protected.class)
-    private String password;
+    @JsonView(View.Public.class)
+    private UserRoles role;
     
-    @JsonView(View.Private.class)
-    private String[] roles;
-
-    public String getFullName()
+    public boolean equals(User user)
     {
-        return fullName;
+        return getEmailAddress().equals(user.getEmailAddress());
     }
 
-    public void setFullName(String fullName)
-    {
-        this.fullName = fullName;
+    /**
+     * @return the userId
+     */
+    public int getUserId() {
+        return userId;
     }
 
-    public String getPostcode()
-    {
-        return postcode;
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public void setPostcode(String postcode)
-    {
-        this.postcode = postcode;
+
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getStreetnumber()
-    {
-        return streetnumber;
+  
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setStreetnumber(String streetnumber)
-    {
-        this.streetnumber = streetnumber;
+
+    public String getMiddleName() {
+        return middleName;
     }
 
-    public String getEmailAddress()
-    {
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+ 
+    public String getEmailAddress() {
         return emailAddress;
     }
 
-    public void setEmailAddress(String emailAddress)
-    {
+
+    public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
-
-    public String getPassword()
+    
+    public boolean isRole(String role)
     {
-        return password;
+        return role.equals(this.getRole().name());
     }
 
-    public void setPassword(String password)
-    {
-        this.password = password;
+ 
+    public UserRoles getRole() {
+        return role;
+    }
+
+
+    public void setRole(UserRoles role) {
+        this.role = role;
+    }
+    
+    public void setRole(String role) {
+        this.role = UserRoles.valueOf(role.toUpperCase());
     }
 
     @Override
     @JsonIgnore
-    public String getName()
-    {
-        return fullName;
-    }
-    
-    public String[] getRoles()
-    {
-        return roles;
+    public String getName() {
+        return this.firstName + this.lastName;
+        //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setRoles(String[] roles)
-    {
-        this.roles = roles;
+ 
+    public String getPassword() {
+        return password;
     }
+
+ 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+ 
+
     
-    public boolean hasRole(String roleName)
-    {
-        if (roles != null)
-        {
-            for(String role : roles)
-            {
-                if(roleName.equals(role))
-                {
-                    return true;
-                }
-            }
-        }
-        
-        return false;
-    }
-    
-    public boolean equals(User user)
-    {
-        return emailAddress.equals(user.getEmailAddress());
-    }
+
 }
