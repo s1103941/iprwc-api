@@ -37,7 +37,7 @@ public class ProductDAO {
         
             
                 Connection con = db.getConnection();
-                PreparedStatement ps = con.prepareStatement("insert into product(productName,productDescription,productImage,productPrice) values(?,?,?,?);");
+                PreparedStatement ps = con.prepareStatement("insert into Product(productName,productDescription,productImage,productPrice) values(?,?,?,?);");
                 ps.setString(1, product.getProductName().trim());
                 ps.setString(2,product.getProductDescription().trim());
                 ps.setString(3, product.getProductImage().trim());

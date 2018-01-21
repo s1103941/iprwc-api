@@ -13,10 +13,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Database {
-    private static String url = "jdbc:mysql://localhost:3306/webshop";
+    private static String url = "jdbc:mysql://145.97.16.189:3306/abdouldb";
     
-    private static String un = "root";
-    private static String pw = "root";
+    private static String un = "abdoul";
+    private static String pw = "abdoul";
     
     public Database(){
         try{

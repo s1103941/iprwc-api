@@ -45,7 +45,7 @@ public class UserResource
     @GET
     @Path("/{id}")
     @JsonView(View.Public.class)
-    @RolesAllowed("GUEST")
+    @RolesAllowed("ADMIN")
     public User retrieve(@PathParam("id") int id)
     {
         return service.getById(id);

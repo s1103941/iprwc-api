@@ -38,7 +38,7 @@ public class CartDAO {
      Connection con = db.getConnection();
      PreparedStatement ps;
         try {
-            ps = con.prepareStatement("insert into cart(cartID, productID) values(?,?);");
+            ps = con.prepareStatement("insert into Cart(cartID, productID) values(?,?);");
             ps.setInt(1, 1);
             ps.setInt(2, productID);
             ps.execute();
@@ -97,7 +97,7 @@ public class CartDAO {
          try{
             Connection con = db.getConnection();
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from product,cart where cart.cartID = 1 and cart.productID = product.productID");
+            ResultSet rs = st.executeQuery("select * from Product,Cart where Cart.cartID = 1 and Cart.productID = Product.productID");
             while(rs.next()){
                
                aantal = rs.getDouble("productPrice");
@@ -120,7 +120,7 @@ public class CartDAO {
         try{
             Connection con = db.getConnection();
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from product,cart where cart.cartID = 1 and cart.productID = product.productID");
+            ResultSet rs = st.executeQuery("select * from Product,Cart where Cart.cartID = 1 and Cart.productID = Product.productID");
             Product product;
             while(rs.next()){
                product = new Product();
